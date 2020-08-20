@@ -1,7 +1,5 @@
 import React from "react"
-
 import Dropzone from 'react-dropzone'
-//import ReactTooltip from 'react-tooltip'
 
 const DropFile = (props) => {
   var keystring
@@ -27,20 +25,21 @@ const DropFile = (props) => {
       </p>
     }
   }
-  //console.log(keystring)
+
   return (
     <Dropzone onDrop={(e) => props.onDrop(e)} disablePreview={true} className="column column-block">
-      <div className="importer json">
-        {/* <div className="how-to-use" data-for="keystore-tip" data-tip="How to use"></div> */}
-        <div className="importer__symbol">
-          <img src={require('../../../assets/img/landing/keystore_active.svg')} />
-          <div className="importer__name">{props.translate("import.json") || "JSON"}</div>
-        </div>
-        <button className="importer__button" onClick={(e) => props.onDrop(e)}>{props.translate("import.select_or_drag") || "Select or Drag"}</button>
-      </div>
-      {/* <ReactTooltip place="top" id="keystore-tip" type="dark" /> */}
+
+      {({ getRootProps, getInputProps, isDragActive }) => {
+        return (
+          <div className="import-account__block theme__import-button" {...getRootProps() }>
+            <input {...getInputProps() } />          
+            <div className="import-account__icon json"/>
+            <div className="import-account__name">{props.translate("import.json") || "KEYSTORE"}</div>
+          </div>
+        )
+      }}
     </Dropzone>
-  )  
+  )
 }
 
 export default DropFile
